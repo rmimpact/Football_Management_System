@@ -2,7 +2,8 @@
 
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.control.Label?>
 <VBox alignment="CENTER" styleClass="background" prefWidth="540.0" xmlns:fx="http://javafx.com/fxml/1">
-
+<Label text="Test"/>
 
 </VBox>
