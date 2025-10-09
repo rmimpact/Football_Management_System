@@ -31,6 +31,15 @@ public class Manager {
         this.teamProperty.set(team);
     }
 
+
+
+    //custom methods------------->
+    public String getTeamName() {
+        return this.getTeam().getTeamName();
+    }
+
+    //custom end ^^^^^^^^^^^^^^^^^^
+
     @Override
     public String toString() {
         return firstName +  " " + lastName;

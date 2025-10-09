@@ -36,26 +36,29 @@ public class LoginController extends Controller<League> {
     private void handleLogin() {
         try {
             int managerId = Integer.parseInt(managerIdField.getText().trim());
-            League.getInstance().validateManager(managerId);
+            ViewLoader.showStage(
+                    League.getInstance().validateManager(managerId),
+                    "/view/ManagerDashboardView.fxml",
+                    "Manager Dashboard",
+                    new Stage()
+            );
             System.out.println("Login successful for manager ID: " + managerId);
-
         } catch (NumberFormatException e) {
             try {
-                throw new UnauthorisedAccessException("Incorrect format for manager id.");
+                throw new UnauthorisedAccessException("Incorrect format for manager id");
 
             } catch (UnauthorisedAccessException ex) {
                 System.out.println(ex.getMessage());
-                showError(ex.getMessage());
+                showError(ex.getMessage(), ex.getClass().getSimpleName());
             }
         } catch (UnauthorisedAccessException e) {
             System.out.println(e.getMessage());
-            showError(e.getMessage());
+            showError(e.getMessage(), e.getClass().getSimpleName());
         }
     }
-
-    private void showError(String message) {
+    private void showError(String description, String name) {
         try {
-            ErrorController.setErrorMessage(message);
+            ErrorController.setErrorMessage(description, name);
             ViewLoader.showStage(null, "/view/ErrorView.fxml", "Error", new Stage());
         }
         catch (Exception e) {

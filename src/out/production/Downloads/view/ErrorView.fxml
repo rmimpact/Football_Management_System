@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 
 <?import javafx.scene.control.Label?>
-<VBox alignment="CENTER" styleClass="background" prefWidth="540.0" xmlns:fx="http://javafx.com/fxml/1">
-<Label text="Test"/>
+<?import java.net.URL?>
+<VBox alignment="CENTER" styleClass="background" prefWidth="540.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ErrorController">
+
+    <ImageView fitWidth="540" fitHeight="300">
+        <Image url="/view/image/error.png"/>
+    </ImageView>
+
+    <VBox alignment="CENTER" prefWidth="540.0" spacing="10">
+        <Separator/>
+        <Label fx:id="exceptionNameLabel" text="exceptionNameLabel" styleClass="error"/>
+        <Separator/>
+        <Label fx:id="exceptionMessageLabel" text="exceptionMessageLabel" styleClass="label"/>
+        <Button fx:id="exitButton" styleClass="button" prefWidth="540" HBox.hgrow="ALWAYS" text="Close" onAction="#handleExit"/>
+    </VBox>
+    <stylesheets>
+        <URL value="@style.css"/>
+    </stylesheets>
 
 </VBox>
