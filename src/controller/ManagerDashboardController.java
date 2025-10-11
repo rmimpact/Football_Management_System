@@ -9,32 +9,42 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.application.League;
-import model.application.Manager;
 
 public class ManagerDashboardController extends Controller<League> {
 
-    @FXML private Button swapButton;
-    @FXML private Button closeButton;
     @FXML private Label teamLabel;
     @FXML private ImageView jerseyPatch;
     @FXML private Button withdrawButton;
     @FXML private Button manageButton;
 
-
     @FXML
     private void initialize() {
         refreshDashboard();
-        model.getLoggedInManager().teamProperty().addListener((observable, oldValue, newValue) -> {
-            refreshDashboard();});
+        model.getLoggedInManager().teamProperty().addListener((observable, oldValue, newValue) -> refreshDashboard());
         /*Debugging*/ System.out.println("ManagerDashboardController initialized");
-
-        System.out.println(model.getLoggedInManager().getTeam().toString());
         jerseyPatch.setImage(new Image(model.getLoggedInManager().getJerseyPatchPath()));
+
+
+
     }
 
     public void refreshDashboard() {
-        teamLabel.setText(model.getLoggedInManager().getTeam().toString());
-        jerseyPatch.setImage(new Image(model.getLoggedInManager().getJerseyPatchPath()));
+        try {
+            teamLabel.setText(model.getLoggedInManager().getTeam().toString());
+            jerseyPatch.setImage(new Image(model.getLoggedInManager().getJerseyPatchPath()));
+        }
+        catch (NullPointerException e) {
+            teamLabel.setText("No Team");
+            jerseyPatch.setImage(new Image("/view/image/none.png"));
+        }
+        if (model.getLoggedInManager().getTeam() == null) {
+            withdrawButton.setDisable(true);
+            manageButton.setDisable(true);
+        }
+        else {
+            withdrawButton.setDisable(false);
+            manageButton.setDisable(false);
+        }
     }
 
     public void handleClose() {
@@ -42,7 +52,7 @@ public class ManagerDashboardController extends Controller<League> {
     }
 
     public void handleSwapButton() {
-        System.out.println("Swapping"); //Debugging
+        /*Debugging*/ System.out.println("Swapping");
 
         ViewLoader.showStage(
                 League.getInstance(),
@@ -53,7 +63,8 @@ public class ManagerDashboardController extends Controller<League> {
     }
 
     public void handleWithdraw() {
-        System.out.println("Withdrawing"); //Debugging
+        /*Debugging*/ System.out.println("Withdrawing " + model.getLoggedInManager() + " from " + model.getLoggedInManager().getTeam());
+        model.withdrawManagerFromTeam(model.getLoggedInManager());
 
     }
 
