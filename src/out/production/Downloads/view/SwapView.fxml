@@ -3,8 +3,33 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.control.Label?>
-<VBox alignment="CENTER" styleClass="background" prefWidth="540.0" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<?import javafx.scene.control.Separator?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" styleClass="background"
+      prefWidth="540.0"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.SwapController">
 
 
-    <Label text="Tesing Label"/>
+    <ImageView fitWidth="540" fitHeight="300">
+        <Image url="/view/image/banner.png"/>
+    </ImageView>
+
+    <VBox alignment="CENTER" prefWidth="540" spacing="10">
+        <Separator/>
+        <Label text="Swap Team" styleClass="heading"/>
+        <Separator/>
+        <HBox>
+            <Button fx:id="swapButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Swap"/>
+            <Button fx:id="closeButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Close" onAction="#handleClose"/>
+        </HBox>
+    </VBox>
+
+    <stylesheets>
+        <URL value="@style.css"/>
+    </stylesheets>
 </VBox>

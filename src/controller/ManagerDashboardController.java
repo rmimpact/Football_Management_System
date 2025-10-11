@@ -16,7 +16,7 @@ public class ManagerDashboardController extends Controller<League> {
     @FXML private Button swapButton;
     @FXML private Button closeButton;
     @FXML private Label teamLabel;
-    @FXML private ImageView jersyPatch;
+    @FXML private ImageView jerseyPatch;
     @FXML private Button withdrawButton;
     @FXML private Button manageButton;
 
@@ -27,7 +27,7 @@ public class ManagerDashboardController extends Controller<League> {
         System.out.println("Hello");
         //System.out.println();
         System.out.println(model.getLoggedInManager().getTeam().toString());
-        jersyPatch.setImage(new Image(model.getLoggedInManager().getJerseyPatchPath()));
+        jerseyPatch.setImage(new Image(model.getLoggedInManager().getJerseyPatchPath()));
     }
 
     public void handleClose() {
