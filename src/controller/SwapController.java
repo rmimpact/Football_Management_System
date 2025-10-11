@@ -3,9 +3,7 @@ package controller;
 import au.edu.uts.ap.javafx.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.Scene;
 import javafx.scene.control.ListView;
-import javafx.stage.Stage;
 import model.application.League;
 import model.application.Team;
 
@@ -20,9 +18,7 @@ public class SwapController extends Controller<League> {
     @FXML
     private void initialize() {
         teamListView.setItems(model.getManageableTeams().getTeams());
-        teamListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            swapButton.setDisable(newValue == null);
-        });
+        teamListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> swapButton.setDisable(newValue == null));
     }
 
     @FXML
