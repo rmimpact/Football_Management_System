@@ -35,6 +35,7 @@ public class Manager {
 
     //custom methods------------->
     public String getJerseyPatchPath() {
+        if (this.getTeam() == null) return "/view/image/none.png";
         switch (this.getTeam().getTeamName()) {
             case "Bulldogs": return "/view/image/bulldogs.png";
             case "Eels": return "/view/image/eels.png";

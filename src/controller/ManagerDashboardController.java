@@ -23,10 +23,17 @@ public class ManagerDashboardController extends Controller<League> {
 
     @FXML
     private void initialize() {
-        teamLabel.setText(model.getLoggedInManager().getTeam().toString());
-        System.out.println("Hello");
-        //System.out.println();
+        refreshDashboard();
+        model.getLoggedInManager().teamProperty().addListener((observable, oldValue, newValue) -> {
+            refreshDashboard();});
+        /*Debugging*/ System.out.println("ManagerDashboardController initialized");
+
         System.out.println(model.getLoggedInManager().getTeam().toString());
+        jerseyPatch.setImage(new Image(model.getLoggedInManager().getJerseyPatchPath()));
+    }
+
+    public void refreshDashboard() {
+        teamLabel.setText(model.getLoggedInManager().getTeam().toString());
         jerseyPatch.setImage(new Image(model.getLoggedInManager().getJerseyPatchPath()));
     }
 
@@ -34,7 +41,7 @@ public class ManagerDashboardController extends Controller<League> {
         System.exit(0);
     }
 
-    public void handleSwap() {
+    public void handleSwapButton() {
         System.out.println("Swapping"); //Debugging
 
         ViewLoader.showStage(

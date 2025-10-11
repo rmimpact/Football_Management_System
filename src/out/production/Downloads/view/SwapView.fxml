@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Separator?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <VBox alignment="CENTER" styleClass="background"
       prefWidth="540.0"
       xmlns:fx="http://javafx.com/fxml/1"
@@ -23,8 +24,9 @@
         <Separator/>
         <Label text="Swap Team" styleClass="heading"/>
         <Separator/>
+        <ListView fx:id="teamListView" prefWidth="540"/>
         <HBox>
-            <Button fx:id="swapButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Swap"/>
+            <Button fx:id="swapButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Swap" disable="true" onAction="#handleTeamSwap"/>
             <Button fx:id="closeButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Close" onAction="#handleClose"/>
         </HBox>
     </VBox>
