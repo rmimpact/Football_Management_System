@@ -34,8 +34,17 @@ public class Manager {
 
 
     //custom methods------------->
-    public String getTeamName() {
-        return this.getTeam().getTeamName();
+    public String getJerseyPatchPath() {
+        switch (this.getTeam().getTeamName()) {
+            case "Bulldogs": return "/view/image/bulldogs.png";
+            case "Eels": return "/view/image/eels.png";
+            case "Panthers": return "/view/image/panthers.png";
+            case "Sharks": return "/view/image/sharks.png";
+            case "Storm": return "/view/image/storm.png";
+            case "Titans": return "/view/image/titans.png";
+            case "Warriors": return "/view/image/warriors.png";
+            default: return "/view/image/none.png";
+        }
     }
 
     //custom end ^^^^^^^^^^^^^^^^^^

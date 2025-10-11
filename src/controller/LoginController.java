@@ -36,13 +36,16 @@ public class LoginController extends Controller<League> {
     private void handleLogin() {
         try {
             int managerId = Integer.parseInt(managerIdField.getText().trim());
+            Manager manager = League.getInstance().validateManager(managerId);
+            League.getInstance().setLoggedInManager(manager);
             ViewLoader.showStage(
-                    League.getInstance().validateManager(managerId),
+                    League.getInstance(),
                     "/view/ManagerDashboardView.fxml",
                     "Manager Dashboard",
                     new Stage()
             );
             System.out.println("Login successful for manager ID: " + managerId);
+            stage.close();
         } catch (NumberFormatException e) {
             try {
                 throw new UnauthorisedAccessException("Incorrect format for manager id");

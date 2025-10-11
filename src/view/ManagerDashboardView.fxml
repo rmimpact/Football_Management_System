@@ -19,9 +19,13 @@
         <Label fx:id="teamLabel" text="No team" styleClass="heading"/>
         <Separator/>
         <HBox alignment="CENTER" spacing="10">
-            <ImageView fitWidth="215" preserveRatio="true">
-                <Image fx:id="jerseyPatch" url="/view/image/none.png"/>
+            <ImageView fx:id="jersyPatch" fitWidth="215" preserveRatio="true">
+                <Image url="/view/image/none.png"/>
             </ImageView>
+        </HBox>
+        <HBox maxWidth="215">
+            <Button fx:id="withdrawButton" styleClass="button" prefWidth="107.5" text="Withdraw" onAction="#handleWithdraw"/>
+            <Button fx:id="Manage" styleClass="button" prefWidth="107.5" text="Manage" onAction="#handleManage"/>
         </HBox>
         <HBox>
             <Button fx:id="swapButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Swap Team" onAction="#handleSwap"/>
