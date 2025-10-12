@@ -70,5 +70,11 @@ public class ManagerDashboardController extends Controller<League> {
 
     public void handleManage() {
         System.out.println("Managing");
+        ViewLoader.showStage(
+                League.getInstance(),
+                "/view/TeamDashboardView.fxml",
+                "Team Dashboard",
+                new Stage()
+        );
     }
 }

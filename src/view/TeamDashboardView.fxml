@@ -1,8 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Label?>
+<?import java.net.URL?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
 
-<VBox alignment="CENTER" styleClass="background" prefWidth="540.0" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" styleClass="background"
+      prefWidth="540.0"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.TeamDashboardController">
 
+    <ImageView fitWidth="540" fitHeight="300">
+        <Image url="/view/image/banner.png"/>
+    </ImageView>
+
+    <VBox alignment="CENTER" prefWidth="540.0" spacing="10">
+        <Separator/>
+        <Label fx:id="teamLabel" text="You should not see this" styleClass="heading"/>
+        <Separator/>
+
+        <HBox alignment="CENTER">
+            <Label text="Sign a new player:" styleClass="label"/>
+            <TextField fx:id="playerSearchTextField" disable="false" onKeyReleased="#handleKeyRelease"/>
+            <Button fx:id="signPlayerButton" text="Sign" styleClass="button" prefWidth="40" disable="true" onAction="#handlePlayerSign"/>
+        </HBox>
+
+        <GridPane hgap="10" vgap="10">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="60"/>
+                <ColumnConstraints percentWidth="40"/>
+            </columnConstraints>
+
+            <rowConstraints>
+                <RowConstraints percentHeight="100"/>
+            </rowConstraints>
+
+            <TableView fx:id="playerTableView"
+                       GridPane.columnIndex="0">
+                <columns>
+                    <TableColumn fx:id="nameColumn" text="Name" resizable="false"/>
+                    <TableColumn fx:id="positionColumn" text="Position" resizable="false"/>
+                </columns>
+            </TableView>
+
+            <VBox GridPane.columnIndex="1" alignment="TOP_CENTER" spacing="8">
+                <Label text="Active Team" styleClass="activeTeamHeader"/>
+
+                <GridPane fx:id="shirtGrid" hgap="10" vgap="10" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="33"/>
+                        <ColumnConstraints percentWidth="33"/>
+                        <ColumnConstraints percentWidth="33"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints percentHeight="33"/>
+                        <RowConstraints percentHeight="33"/>
+                        <RowConstraints percentHeight="33"/>
+                    </rowConstraints>
+
+                    <ImageView fx:id="topMidPlayerImage"
+                               GridPane.rowIndex="0" GridPane.columnIndex="1"
+                               fitWidth="35" preserveRatio="true">
+                        <Image url="/view/image/none.png"/>
+                    </ImageView>
+
+                    <ImageView fx:id="midLeftPlayerImage"
+                               GridPane.rowIndex="1" GridPane.columnIndex="0"
+                               fitWidth="35" preserveRatio="true">
+                        <Image url="/view/image/none.png"/>
+                    </ImageView>
+                    <ImageView fx:id="midMidPlayerImage"
+                               GridPane.rowIndex="1" GridPane.columnIndex="1"
+                               fitWidth="35" preserveRatio="true">
+                        <Image url="/view/image/none.png"/>
+                    </ImageView>
+                    <ImageView fx:id="midRightPlayerImage"
+                               GridPane.rowIndex="1" GridPane.columnIndex="2"
+                               fitWidth="35" preserveRatio="true">
+                        <Image url="/view/image/none.png"/>
+                    </ImageView>
+
+                    <ImageView fx:id="botMidPlayerImage"
+                               GridPane.rowIndex="2" GridPane.columnIndex="1"
+                               fitWidth="35" preserveRatio="true">
+                        <Image url="/view/image/none.png"/>
+                    </ImageView>
+                </GridPane>
+            </VBox>
+        </GridPane>
+    </VBox>
+
+    <HBox>
+        <Button styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Unsign" onAction="#handlePlayerUnsign" disable="true"/>
+        <Button styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Close" onAction="#handleClose"/>
+    </HBox>
+
+    <stylesheets>
+        <URL value="@style.css"/>
+    </stylesheets>
 
 </VBox>
