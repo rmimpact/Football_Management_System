@@ -25,10 +25,10 @@
         <Label fx:id="teamLabel" text="You should not see this" styleClass="heading"/>
         <Separator/>
 
-        <HBox alignment="CENTER">
+        <HBox alignment="CENTER" spacing="10">
             <Label text="Sign a new player:" styleClass="label"/>
             <TextField fx:id="playerSearchTextField" disable="false" onKeyReleased="#handleKeyRelease"/>
-            <Button fx:id="signPlayerButton" text="Sign" styleClass="button" prefWidth="40" disable="true" onAction="#handlePlayerSign"/>
+            <Button fx:id="signPlayerButton" text="Sign" styleClass="button" prefWidth="60" disable="true" onAction="#handlePlayerSign"/>
         </HBox>
 
         <GridPane hgap="10" vgap="10">
@@ -41,16 +41,17 @@
                 <RowConstraints percentHeight="100"/>
             </rowConstraints>
 
-            <TableView fx:id="playerTableView"
+            <TableView fx:id="playerTable"
                        GridPane.columnIndex="0">
                 <columns>
-                    <TableColumn fx:id="nameColumn" text="Name" resizable="false"/>
-                    <TableColumn fx:id="positionColumn" text="Position" resizable="false"/>
+                    <TableColumn fx:id="playerNameColumn" text="Name" resizable="false"/>
+                    <TableColumn fx:id="playerPositionColumn" text="Position" resizable="false"/>
                 </columns>
             </TableView>
 
             <VBox GridPane.columnIndex="1" alignment="TOP_CENTER" spacing="8">
                 <Label text="Active Team" styleClass="activeTeamHeader"/>
+
 
                 <GridPane fx:id="shirtGrid" hgap="10" vgap="10" alignment="CENTER">
                     <columnConstraints>
