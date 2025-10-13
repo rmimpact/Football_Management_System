@@ -16,7 +16,7 @@
         <Separator/>
         <HBox alignment="CENTER" spacing="10">
             <Label text="Manager ID: "/>
-            <TextField fx:id="managerIdField" onKeyReleased="#handleKeyRelease"/>
+            <TextField fx:id="managerIdField" onKeyReleased="#handleKeyRelease" onAction="#handleLogin"/>
         </HBox>
         <HBox>
             <Button fx:id="loginButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Login" onAction="#handleLogin" disable="true"/>
