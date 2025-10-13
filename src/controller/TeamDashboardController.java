@@ -73,6 +73,10 @@ public class TeamDashboardController extends Controller<League> {
     @FXML
     private void initialize() {
         /*Debugging*/ System.out.println("mode.getLoggedInManager().getTeam() = " + model.getLoggedInManager().getTeam().getAllPlayers().getPlayers());
+        playerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        playerNameColumn.prefWidthProperty().bind(playerTable.widthProperty().multiply(0.5));
+        playerPositionColumn.prefWidthProperty().bind(playerTable.widthProperty().multiply(0.5));
+
         teamLabel.setText(model.getLoggedInManager().getTeam().toString());
         playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().fullNameProperty());
         playerPositionColumn.setCellValueFactory(cellData -> cellData.getValue().positionProperty());
