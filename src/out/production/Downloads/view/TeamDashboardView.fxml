@@ -67,29 +67,44 @@
 
                     <ImageView fx:id="topMidPlayerImage"
                                GridPane.rowIndex="0" GridPane.columnIndex="1"
-                               fitWidth="35" preserveRatio="true">
+                               fitWidth="35" preserveRatio="true"
+                               styleClass="imageview-shirt"
+                               pickOnBounds="true"
+                               onMouseClicked="#handleTopMidPlayerClick">
                         <Image url="/view/image/none.png"/>
                     </ImageView>
 
                     <ImageView fx:id="midLeftPlayerImage"
                                GridPane.rowIndex="1" GridPane.columnIndex="0"
-                               fitWidth="35" preserveRatio="true">
+                               fitWidth="35" preserveRatio="true"
+                               styleClass="imageview-shirt"
+                               pickOnBounds="true"
+                               onMouseClicked="#handleMidLeftPlayerClick">
                         <Image url="/view/image/none.png"/>
                     </ImageView>
                     <ImageView fx:id="midMidPlayerImage"
                                GridPane.rowIndex="1" GridPane.columnIndex="1"
-                               fitWidth="35" preserveRatio="true">
+                               fitWidth="35" preserveRatio="true"
+                               styleClass="imageview-shirt"
+                               pickOnBounds="true"
+                               onMouseClicked="#handleMidMidPlayerImageClick">
                         <Image url="/view/image/none.png"/>
                     </ImageView>
                     <ImageView fx:id="midRightPlayerImage"
                                GridPane.rowIndex="1" GridPane.columnIndex="2"
-                               fitWidth="35" preserveRatio="true">
+                               fitWidth="35" preserveRatio="true"
+                               styleClass="imageview-shirt"
+                               pickOnBounds="true"
+                               onMouseClicked="#handleMidRightPlayerImageClick">
                         <Image url="/view/image/none.png"/>
                     </ImageView>
 
                     <ImageView fx:id="botMidPlayerImage"
                                GridPane.rowIndex="2" GridPane.columnIndex="1"
-                               fitWidth="35" preserveRatio="true">
+                               fitWidth="35" preserveRatio="true"
+                               styleClass="imageview-shirt"
+                               pickOnBounds="true"
+                               onMouseClicked="#handleBotMidPlayerImageClick">
                         <Image url="/view/image/none.png"/>
                     </ImageView>
                 </GridPane>
@@ -98,7 +113,7 @@
     </VBox>
 
     <HBox>
-        <Button styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Unsign" onAction="#handlePlayerUnsign" disable="true"/>
+        <Button fx:id="unsignPlayerButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Unsign" onAction="#handlePlayerUnsign" disable="true"/>
         <Button styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Close" onAction="#handleClose"/>
     </HBox>
 

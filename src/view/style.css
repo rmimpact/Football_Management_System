@@ -69,3 +69,20 @@ TableView .table-cell{
     -fx-font-size: 14pt;
 }
 /*---------------------------------------------------------------------*/
+
+
+
+.imageview-shirt {
+    -fx-cursor: hand;           /* Changes cursor to hand on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 2);
+    -fx-opacity: 0.95;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-preserveRatio: true;
+}
+
+.imageview-shirt:hover {
+    -fx-scale-x: 1.05;          /* Slight zoom on hover */
+    -fx-scale-y: 1.05;
+    -fx-opacity: 1;
+}
