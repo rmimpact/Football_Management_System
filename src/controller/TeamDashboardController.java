@@ -1,3 +1,14 @@
+
+/*--------------- To Do -------------------
+        - handleUnsign
+        - Refresh table Function
+        - Finalise Table + Active team views
+        - When an image on the active team is clicked
+        unsign that player from the active team but
+        keep them in the main team.
+*/
+
+
 package controller;
 
 import au.edu.uts.ap.javafx.Controller;
@@ -11,6 +22,7 @@ import javafx.stage.Stage;
 import model.application.*;
 import javafx.scene.control.Button;
 import model.application.Player;
+import model.application.League;
 
 public class TeamDashboardController extends Controller<League> {
 
@@ -20,14 +32,26 @@ public class TeamDashboardController extends Controller<League> {
     @FXML TextField playerSearchTextField;
     @FXML Label teamLabel;
     @FXML Button signPlayerButton;
+    @FXML Button unsignPlayerButton;
 
 
     @FXML
     private void initialize() {
         System.out.println("Initializing TeamDashboardController");
         System.out.println("Managing: " + model.getLoggedInManager().getTeam());
+                //getLoggedInManager().getTeam());
         teamLabel.setText(model.getLoggedInManager().getTeam().toString());
         refresh();
+
+            // Wait until both controls are ready
+            playerTable.sceneProperty().addListener((obs, oldScene, newScene) -> {
+                if (newScene != null && unsignPlayerButton != null) {
+                    unsignPlayerButton.disableProperty().bind(
+                            playerTable.getSelectionModel().selectedItemProperty().isNull()
+                    );
+                }
+            });
+
         System.out.println("playerTable = " + playerTable);
         System.out.println("playerNameColumn = " + playerNameColumn);
         System.out.println("playerPositionColumn = " + playerPositionColumn);
@@ -59,7 +83,11 @@ public class TeamDashboardController extends Controller<League> {
         /*Debugging*/ System.out.println("Sign button clicked.");
         try{
             String search = playerSearchTextField.getText();
+            Player player = model.getPlayers().player(search);
+
             model.getPlayers().player(search).setTeam(model.getLoggedInManager().getTeam());
+            model.getLoggedInManager().getTeam().getAllPlayers().add(player);
+
             refresh();
             /*Debugging*/ System.out.println("Signing "+ model.getPlayers().player(search) + " to " + model.getLoggedInManager().getTeam());
         }
@@ -85,7 +113,16 @@ public class TeamDashboardController extends Controller<League> {
 
     @FXML
     private void handlePlayerUnsign() {
+
         System.out.println("Unsign button clicked.");
+        Player player = playerTable.getSelectionModel().getSelectedItem();
+        player.setTeam(null);
+        model.getLoggedInManager().getTeam().getAllPlayers().remove(player);
+        System.out.println("Unsigning "+ player);
+
+        refresh();
+        //model.getLoggedInManager().getTeam().getAllPlayers().;
+        //model.getLoggedInManager().getTeam().getAllPlayers().remove(player);
     }
 
     @FXML
@@ -101,6 +138,9 @@ public class TeamDashboardController extends Controller<League> {
     }
 
     private void refresh() {
+        //playerTable.getItems().clear();
+
+        System.out.println("mode.getLoggedInManager().getTeam() = " + model.getLoggedInManager().getTeam().getAllPlayers().getPlayers());
         playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().fullNameProperty());
         playerPositionColumn.setCellValueFactory(cellData -> cellData.getValue().positionProperty());
         playerTable.setItems(model.getLoggedInManager().getTeam().getAllPlayers().getPlayers());
