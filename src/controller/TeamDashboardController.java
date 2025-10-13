@@ -1,11 +1,11 @@
 
 /*--------------- To Do -------------------
-        - handleUnsign -> pending
+        - handleUnsign -> done
         - Refresh table Function -> done
-        - Finalise Table + Active team views -> incomplete
+        - Finalise Table + Active team views -> done
         - When an image on the active team is clicked
         unsign that player from the active team but
-        keep them in the main team. -> incomplete
+        keep them in the main team. -> done
 */
 
 
