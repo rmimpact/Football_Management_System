@@ -14,16 +14,15 @@ package controller;
 import au.edu.uts.ap.javafx.Controller;
 import au.edu.uts.ap.javafx.ViewLoader;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.application.*;
-import javafx.scene.control.Button;
 import model.application.Player;
 import model.application.League;
+
+import javax.naming.CannotProceedException;
 
 public class TeamDashboardController extends Controller<League> {
 
@@ -43,30 +42,33 @@ public class TeamDashboardController extends Controller<League> {
     @FXML ImageView midRightPlayerImage;
     @FXML ImageView botMidPlayerImage;
 
+    private Player[] currentTeam;
+    private boolean topMidPlayerImageStatus;
+
 
     @FXML public void handleTopMidPlayerClick() {
         /*Debugging*/ System.out.println("Clicked Top Mid Player");
-        Player[] currentTeam = model.getLoggedInManager().getTeam().getCurrentTeam();
-        for (int i = 0; i < currentTeam.length; i++) {
-            System.out.println(currentTeam[i]);
-        }
-        //System.out.println(model.getLoggedInManager().getTeam().getCurrentTeam());
+        handleShirtAction(0, topMidPlayerImage);
     }
 
     @FXML public void handleMidLeftPlayerClick() {
         /*Debugging*/ System.out.println("Clicked Mid Left Player");
+        handleShirtAction(1, midLeftPlayerImage);
     }
 
     @FXML public void handleMidMidPlayerImageClick() {
         /*Debugging*/ System.out.println("Clicked Mid Mid Player");
+        handleShirtAction(2, midMidPlayerImage);
     }
 
     @FXML public void handleMidRightPlayerImageClick() {
         /*Debugging*/ System.out.println("Clicked Mid Right Player");
+        handleShirtAction(3, midRightPlayerImage);
     }
 
     @FXML public void handleBotMidPlayerImageClick() {
         /*Debugging*/ System.out.println("Clicked Bot Mid Player");
+        handleShirtAction(4, botMidPlayerImage);
     }
 
 
@@ -82,6 +84,24 @@ public class TeamDashboardController extends Controller<League> {
         playerNameColumn.prefWidthProperty().bind(playerTable.widthProperty().multiply(0.5));
         playerPositionColumn.prefWidthProperty().bind(playerTable.widthProperty().multiply(0.5));
 
+
+        Tooltip topMid = new Tooltip(getActivePlayerTool(0));
+        Tooltip.install(topMidPlayerImage, topMid);
+        
+        Tooltip midLeft = new Tooltip(getActivePlayerTool(1));
+        Tooltip.install(midLeftPlayerImage, midLeft);
+        
+        Tooltip midMid = new Tooltip(getActivePlayerTool(2));
+        Tooltip.install(midMidPlayerImage, midMid);
+        
+        Tooltip midRight = new Tooltip(getActivePlayerTool(3));
+        Tooltip.install(midRightPlayerImage, midRight);
+        
+        Tooltip botMid = new Tooltip(getActivePlayerTool(4));
+        Tooltip.install(topMidPlayerImage, botMid);
+
+        currentTeam = model.getLoggedInManager().getTeam().getActiveTeam();
+
         teamLabel.setText(model.getLoggedInManager().getTeam().toString());
         playerNameColumn.setCellValueFactory(cellData -> cellData.getValue().fullNameProperty());
         playerPositionColumn.setCellValueFactory(cellData -> cellData.getValue().positionProperty());
@@ -96,6 +116,61 @@ public class TeamDashboardController extends Controller<League> {
 
 
 
+
+    private void handleShirtAction(int n, ImageView shirtImage) {
+        /*Debugging*/ System.out.println("Clicked Top Mid Player");
+        /*Debugging*/ System.out.println(currentTeam[n]);
+
+        Player selectedPlayer = playerTable.getSelectionModel().getSelectedItem();
+        Team team = model.getLoggedInManager().getTeam();
+        //if n contains a player (not null) and
+
+        if (team.alreadyOnActiveTeam(selectedPlayer) != 0 && selectedPlayer != null) {
+            showError(selectedPlayer + " is already in the active playing team", "FillException");
+            return;
+        }
+        else if (selectedPlayer == null) {
+
+        }
+
+        if (currentTeam[n] != null && selectedPlayer == null) {
+            shirtImage.setImage(new Image("/view/image/none.png"));
+            /*Debugging*/ System.out.println(currentTeam[n] + " is no longer active.");
+            currentTeam[n] = null;
+        } else if (currentTeam[n] == null && selectedPlayer != null) {
+            currentTeam[n] = selectedPlayer;
+            shirtImage.setImage(new Image(model.getLoggedInManager().getJerseyPatchPath()));
+            /*Debugging*/ System.out.println("Player " + currentTeam[n] + " is now active.");
+        }
+        else {
+            /*Debugging*/ System.out.println("Swapped active player '" + currentTeam[n] + "' for " + selectedPlayer);
+            currentTeam[n] = selectedPlayer;
+
+        }
+        updateTooltips();
+    }
+
+    private void updateTooltips() {
+        Tooltip.install(topMidPlayerImage, new Tooltip(getActivePlayerTool(0)));
+        Tooltip.install(midLeftPlayerImage, new Tooltip(getActivePlayerTool(1)));
+        Tooltip.install(midMidPlayerImage, new Tooltip(getActivePlayerTool(2)));
+        Tooltip.install(midRightPlayerImage, new Tooltip(getActivePlayerTool(3)));
+        Tooltip.install(botMidPlayerImage, new Tooltip(getActivePlayerTool(4)));
+    }
+    
+    private String getActivePlayerTool(int x) {
+
+        try {
+            if (currentTeam[x] == null) {
+                return "Unallocated";
+            } else {
+                return currentTeam[x].toString();
+            }
+        }
+        catch (NullPointerException e) {
+            return "Unallocated";
+        }
+    }
 
 
 
@@ -132,11 +207,39 @@ public class TeamDashboardController extends Controller<League> {
     @FXML
     private void handlePlayerUnsign() {
         System.out.println("Unsign button clicked.");
+
+        Team team = model.getLoggedInManager().getTeam();
         Player player = playerTable.getSelectionModel().getSelectedItem();
-        player.setTeam(null);
-        model.getLoggedInManager().getTeam().getAllPlayers().remove(player);
-        /*Debugging*/ System.out.println("Unsigning " + player);
-    }
+
+        int playerState = team.alreadyOnActiveTeam(player);
+
+        switch(playerState) {
+            case 0:
+                player.setTeam(null);
+                team.getAllPlayers().remove(player);
+                /*Debugging*/
+                System.out.println("Unsigning " + player);
+                break;
+            case 1:
+                showError("Cannot remove " + player.getFullName() + ", player is already on the active team", "InvalidUnsigningException");
+                break;
+            default:
+                showError("what the fuck???", "??????");
+        }
+        }
+
+
+       /* try {
+            if (team.alreadyOnActiveTeam(player)) {
+
+            }
+            else
+        }
+        catch (CannotProceedException e) {
+
+        }*/
+
+
     //^^^^^ Signing ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     @FXML
@@ -156,7 +259,7 @@ public class TeamDashboardController extends Controller<League> {
         this.stage.close() ;
     }
 
-    private void showError(String description, String name) {
+    public void showError(String description, String name) {
         try {
             ErrorController.setErrorMessage(description, name);
             ViewLoader.showStage(null, "/view/ErrorView.fxml", "Error", new Stage());
