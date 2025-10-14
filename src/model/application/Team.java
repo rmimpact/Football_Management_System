@@ -31,6 +31,19 @@ public class Team {
         this.manager = manager;
     }
 
+
+
+
+
+    //-------------- Active Team
+
+    public Player[] getCurrentTeam() {
+        return this.currentTeam;
+    }
+
+
+
+
     @Override
     public String toString() {
         return this.localName + " " + this.teamName;

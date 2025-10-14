@@ -46,6 +46,11 @@ public class TeamDashboardController extends Controller<League> {
 
     @FXML public void handleTopMidPlayerClick() {
         /*Debugging*/ System.out.println("Clicked Top Mid Player");
+        Player[] currentTeam = model.getLoggedInManager().getTeam().getCurrentTeam();
+        for (int i = 0; i < currentTeam.length; i++) {
+            System.out.println(currentTeam[i]);
+        }
+        //System.out.println(model.getLoggedInManager().getTeam().getCurrentTeam());
     }
 
     @FXML public void handleMidLeftPlayerClick() {
