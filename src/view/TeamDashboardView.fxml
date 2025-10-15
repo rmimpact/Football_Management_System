@@ -41,6 +41,8 @@
                 <RowConstraints percentHeight="100"/>
             </rowConstraints>
 
+            <VBox>
+
             <TableView fx:id="playerTable"
                        GridPane.columnIndex="0"
                        GridPane.hgrow="ALWAYS"
@@ -53,6 +55,7 @@
                     <TableColumn fx:id="playerPositionColumn" text="Position" resizable="false"/>
                 </columns>
             </TableView>
+            </VBox>
 
             <VBox GridPane.columnIndex="1" alignment="TOP_CENTER" spacing="8">
                 <Label text="Active Team" styleClass="activeTeamHeader" textAlignment="CENTER" alignment="CENTER" prefWidth="160"/>
