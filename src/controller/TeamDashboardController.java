@@ -13,10 +13,12 @@ package controller;
 
 import au.edu.uts.ap.javafx.Controller;
 import au.edu.uts.ap.javafx.ViewLoader;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
 import model.application.*;
 import model.application.Player;
@@ -109,6 +111,9 @@ public class TeamDashboardController extends Controller<League> {
         playerTable.getSelectionModel().selectedItemProperty().addListener((obs, old, nw) -> {
             unsignPlayerButton.setDisable(nw == null);
         });
+        // In your controller class, after the TableView is initialized
+        playerTable.addEventFilter(ScrollEvent.ANY, Event::consume);
+
         playerTable.refresh();
     }
 
