@@ -100,7 +100,7 @@ public class TeamDashboardController extends Controller<League> {
         Tooltip.install(midRightPlayerImage, midRight);
         
         Tooltip botMid = new Tooltip(getActivePlayerTool(4));
-        Tooltip.install(topMidPlayerImage, botMid);
+        Tooltip.install(botMidPlayerImage, botMid);
 
         currentTeam = model.getLoggedInManager().getTeam().getActiveTeam();
 
@@ -111,7 +111,6 @@ public class TeamDashboardController extends Controller<League> {
         playerTable.getSelectionModel().selectedItemProperty().addListener((obs, old, nw) -> {
             unsignPlayerButton.setDisable(nw == null);
         });
-        // In your controller class, after the TableView is initialized
         playerTable.addEventFilter(ScrollEvent.ANY, Event::consume);
 
         playerTable.refresh();
@@ -131,7 +130,7 @@ public class TeamDashboardController extends Controller<League> {
         //if n contains a player (not null) and
 
         if (team.alreadyOnActiveTeam(selectedPlayer) != 0 && selectedPlayer != null) {
-            showError(selectedPlayer + " is already in the active playing team", "FillException");
+            showError(selectedPlayer.getFullName() + " is already in the active playing team", "FillException");
             return;
         }
         else if (selectedPlayer == null) {
@@ -187,6 +186,10 @@ public class TeamDashboardController extends Controller<League> {
     @FXML
     private void handlePlayerSign() {
         /*Debugging*/ System.out.println("Sign button clicked.");
+        if (playerSearchTextField.getText().isEmpty()) {
+            /*Debugging*/ System.out.println("Enter button clicked with no input.");
+            return;
+        }
         try{
             String search = playerSearchTextField.getText();
             Player player = model.getPlayers().player(search);
@@ -226,10 +229,10 @@ public class TeamDashboardController extends Controller<League> {
                 System.out.println("Unsigning " + player);
                 break;
             case 1:
-                showError("Cannot remove " + player.getFullName() + ", player is already on the active team", "InvalidUnsigningException");
+                showError("Cannot remove " + player.getFullName() + ", player is in the active team", "InvalidSigningException");
                 break;
             default:
-                showError("what the fuck???", "??????");
+                showError("Something isnt right...", "??????");
         }
         }
 

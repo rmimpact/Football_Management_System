@@ -16,6 +16,14 @@ public class ManagerDashboardController extends Controller<League> {
     @FXML private ImageView jerseyPatch;
     @FXML private Button withdrawButton;
     @FXML private Button manageButton;
+    @FXML public Stage swapStage = null;
+
+
+    @FXML
+    public Stage getSwapStage() {
+        return swapStage;
+    }
+
 
     @FXML
     private void initialize() {
@@ -53,12 +61,13 @@ public class ManagerDashboardController extends Controller<League> {
 
     public void handleSwapButton() {
         /*Debugging*/ System.out.println("Swapping");
+        swapStage = new Stage();
 
         ViewLoader.showStage(
                 League.getInstance(),
                 "/view/SwapView.fxml",
                 "Swap",
-                new Stage()
+                swapStage
         );
     }
 
@@ -76,5 +85,9 @@ public class ManagerDashboardController extends Controller<League> {
                 "Team Dashboard",
                 new Stage()
         );
+        if(swapStage != null){
+            swapStage.close();
+        }
+        stage.close();
     }
 }

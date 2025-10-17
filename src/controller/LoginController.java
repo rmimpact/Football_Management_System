@@ -34,6 +34,9 @@ public class LoginController extends Controller<League> {
 
     @FXML
     private void handleLogin() {
+        if (managerIdField.getText().isEmpty()) {
+            return;
+        }
         try {
             int managerId = Integer.parseInt(managerIdField.getText().trim());
             Manager manager = League.getInstance().validateManager(managerId);
