@@ -24,11 +24,13 @@
             </ImageView>
         </HBox>
         <HBox maxWidth="215">
-            <Button fx:id="withdrawButton" styleClass="button" prefWidth="107.5" text="Withdraw" onAction="#handleWithdraw"/>
+            <Button fx:id="withdrawButton" styleClass="button" prefWidth="107.5" text="Withdraw"
+                    onAction="#handleWithdraw"/>
             <Button fx:id="manageButton" styleClass="button" prefWidth="107.5" text="Manage" onAction="#handleManage"/>
         </HBox>
         <HBox>
-            <Button styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Swap Team" onAction="#handleSwapButton"/>
+            <Button styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Swap Team"
+                    onAction="#handleSwapButton"/>
             <Button styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Close" onAction="#handleClose"/>
         </HBox>
     </VBox>

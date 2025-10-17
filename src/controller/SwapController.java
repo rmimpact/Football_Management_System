@@ -14,7 +14,6 @@ public class SwapController extends Controller<League> {
     @FXML Button closeButton;
     @FXML private ListView<Team> teamListView;
 
-
     @FXML
     private void initialize() {
         teamListView.setItems(model.getManageableTeams().getTeams());

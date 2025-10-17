@@ -1,9 +1,5 @@
 package model.application;
 
-import controller.TeamDashboardController;
-
-import javax.naming.CannotProceedException;
-
 public class Team {
     public static int REQUIRED_TEAM_SIZE = 5;
 
@@ -36,25 +32,23 @@ public class Team {
     }
 
 
-
-
-
-    //-------------- Active Team
+    //-------------- Active Team --------------------\\
 
     public Player[] getActiveTeam() {
+        /*Debugging*/ System.out.println("Active Team gotten");
         return this.currentTeam;
     }
 
-    // Check if player is already in the active team
+    // Check if player is already in the active team (return amount of times the player is found)
     public int alreadyOnActiveTeam(Player player) {
         int count = 0;
         for (int i = 0; i < this.currentTeam.length; i++) {
             if (this.currentTeam[i] == player) {count++;}
         }
+        /*Debugging*/ System.out.println(count);
         return count;
     }
-
-
+    //-------------------------------------------------//
 
     @Override
     public String toString() {

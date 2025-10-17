@@ -31,9 +31,7 @@ public class Manager {
         this.teamProperty.set(team);
     }
 
-
-
-    //custom methods------------->
+    //Jersey Image Patch Path Finder
     public String getJerseyPatchPath() {
         if (this.getTeam() == null) return "/view/image/none.png";
         switch (this.getTeam().getTeamName()) {
@@ -47,8 +45,6 @@ public class Manager {
             default: return "/view/image/none.png";
         }
     }
-
-    //custom end ^^^^^^^^^^^^^^^^^^
 
     @Override
     public String toString() {

@@ -26,12 +26,11 @@ public class ErrorController extends Controller<League> {
     @FXML
     private void initialize() {
         updateLabels();
+        /*Debugging*/ System.out.println("Error ---------------------------");
     }
 
     private void updateLabels() {
         exceptionNameLabel.setText(heading);
         exceptionMessageLabel.setText(description);
     }
-
-
 }

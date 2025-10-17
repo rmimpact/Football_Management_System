@@ -20,20 +20,11 @@ public class ManagerDashboardController extends Controller<League> {
 
 
     @FXML
-    public Stage getSwapStage() {
-        return swapStage;
-    }
-
-
-    @FXML
     private void initialize() {
         refreshDashboard();
         model.getLoggedInManager().teamProperty().addListener((observable, oldValue, newValue) -> refreshDashboard());
         /*Debugging*/ System.out.println("ManagerDashboardController initialized");
         jerseyPatch.setImage(new Image(model.getLoggedInManager().getJerseyPatchPath()));
-
-
-
     }
 
     public void refreshDashboard() {
@@ -74,20 +65,17 @@ public class ManagerDashboardController extends Controller<League> {
     public void handleWithdraw() {
         /*Debugging*/ System.out.println("Withdrawing " + model.getLoggedInManager() + " from " + model.getLoggedInManager().getTeam());
         model.withdrawManagerFromTeam(model.getLoggedInManager());
-
     }
 
     public void handleManage() {
-        System.out.println("Managing");
+        /*Debugging*/ System.out.println("Managing");
         ViewLoader.showStage(
                 League.getInstance(),
                 "/view/TeamDashboardView.fxml",
                 "Team Dashboard",
                 new Stage()
         );
-        if(swapStage != null){
-            swapStage.close();
-        }
+        if(swapStage != null) {swapStage.close();}
         stage.close();
     }
 }

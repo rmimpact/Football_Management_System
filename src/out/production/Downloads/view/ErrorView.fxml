@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
-<?import javafx.scene.control.Label?>
 <?import java.net.URL?>
-<VBox alignment="CENTER" styleClass="background" prefWidth="540.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ErrorController">
+<VBox alignment="CENTER" styleClass="background" prefWidth="540.0" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.ErrorController">
 
     <ImageView fitWidth="540" fitHeight="300">
         <Image url="/view/image/error.png"/>
@@ -18,7 +18,7 @@
         <Label fx:id="exceptionNameLabel" text="exceptionNameLabel" styleClass="error"/>
         <Separator/>
         <Label fx:id="exceptionMessageLabel" text="exceptionMessageLabel" styleClass="label"/>
-        <Button fx:id="exitButton" styleClass="button" prefWidth="540" HBox.hgrow="ALWAYS" text="Close" onAction="#handleExit"/>
+        <Button styleClass="button" prefWidth="540" HBox.hgrow="ALWAYS" text="Close" onAction="#handleExit"/>
     </VBox>
     <stylesheets>
         <URL value="@style.css"/>

@@ -26,8 +26,10 @@
         <Separator/>
         <ListView fx:id="teamListView" prefWidth="540"/>
         <HBox>
-            <Button fx:id="swapButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Swap" disable="true" onAction="#handleTeamSwap"/>
-            <Button fx:id="closeButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Close" onAction="#handleClose"/>
+            <Button fx:id="swapButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Swap"
+                    disable="true" onAction="#handleTeamSwap"/>
+            <Button fx:id="closeButton" styleClass="button" prefWidth="270" HBox.hgrow="ALWAYS" text="Close"
+                    onAction="#handleClose"/>
         </HBox>
     </VBox>
 
