@@ -1,7 +1,7 @@
 # Programming Management Panel
 
 <p>
-  <img src="./demo.gif" width="700" alt="Demo GIF" />
+  <img src="./demo.gif" width="500" alt="Demo GIF" />
 </p>
 
 This application was made for a university assessment task.
