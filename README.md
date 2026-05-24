@@ -1,6 +1,13 @@
 # Programming Management Panel
-This application is being made for a university assessment task.
+
+<p>
+  <img src="./demo.gif" width="700" alt="Demo GIF" />
+</p>
+
+This application was made for a university assessment task.
+
 Its core features include:
+
 - A management login page
 - Advanced team management
 - Sign and unsign players
